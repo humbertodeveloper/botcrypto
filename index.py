@@ -20,34 +20,27 @@ pause = c['time_intervals']['interval_between_moviments']
 pyautogui.PAUSE = pause
 
 cat = """
-                                                _
-                                                \`*-.
-                                                 )  _`-.
-                                                .  : `. .
-                                                : _   '  \\
-                                                ; *` _.   `*-._
-                                                `-.-'          `-.
-                                                  ;       `       `.
-                                                  :.       .        \\
-                                                  . \  .   :   .-'   .
-                                                  '  `+.;  ;  '      :
-                                                  :  '  |    ;       ;-.
-                                                  ; '   : :`-:     _.`* ;
-                                               .*' /  .*' ; .*`- +'  `*'
-                                               `*-*   `*-*  `*-*'
-=========================================================================
-========== 💰 Have I helped you in any way? All I ask is a tip! 🧾 ======
-========== ✨ Faça sua boa ação de hoje, manda aquela gorjeta! 😊 =======
-=========================================================================
-======================== vvv BCOIN BUSD BNB vvv =========================
-============== 0xbd06182D8360FB7AC1B05e871e56c76372510dDf ===============
-=========================================================================
-===== https://www.paypal.com/donate?hosted_button_id=JVYSC6ZYCNQQQ ======
-=========================================================================
 
->>---> Press ctrl + c to kill the bot.
+dP                  dP                                         dP            
+88                  88                                         88            
+88d888b. .d8888b. d8888P .d8888b. 88d888b. dP    dP 88d888b. d8888P .d8888b. 
+88'  `88 88'  `88   88   88'  `"" 88'  `88 88    88 88'  `88   88   88'  `88 
+88.  .88 88.  .88   88   88.  ... 88       88.  .88 88.  .88   88   88.  .88 
+88Y8888' `88888P'   dP   `88888P' dP       `8888P88 88Y888P'   dP   `88888P' 
+                                                .88 88                       
+                                            d8888P  dP  
 
->>---> Some configs can be found in the config.yaml file."""
+============================================================================
+Se o nosso bot está te ajudando a ganhar dinheiro, considere fazer uma boa
+                    doação em BCOIN para este endereço: 
+--------------   0xB00766B8aD9AA0A7e469b6c67460BAdD0d76898A   --------------
+============================================================================
+
+>>---> Pressione CTRL + C para parar o bot
+
+>>---> Você pode alterar algumas configurações no arquivo config.yaml.
+
+"""
 
 
 
@@ -338,42 +331,53 @@ def login():
         return
 
     if clickBtn(images['connect-wallet'], timeout = 10):
-        logger('🎉 Connect wallet button detected, logging in!')
-        login_attempts = login_attempts + 1
-        #TODO mto ele da erro e poco o botao n abre
-        # time.sleep(10)
+        logger('🎉 Connect wallet button detected!')
 
-    if clickBtn(images['select-wallet-2'], timeout=8):
-        # sometimes the sign popup appears imediately
-        login_attempts = login_attempts + 1
-        # print('sign button clicked')
-        # print('{} login attempt'.format(login_attempts))
-        if clickBtn(images['treasure-hunt-icon'], timeout = 15):
-            # print('sucessfully login, treasure hunt btn clicked')
-            login_attempts = 0
-        return
-        # click ok button
+        if c['login_metamask'] == False:
+            if clickBtn(images['username'], timeout = 5):
+                pyautogui.typewrite(c['login_username'], interval = 0.1)
 
-    if not clickBtn(images['select-wallet-1-no-hover'], ):
-        if clickBtn(images['select-wallet-1-hover'], threshold = ct['select_wallet_buttons'] ):
-            pass
-            # o ideal era que ele alternasse entre checar cada um dos 2 por um tempo 
-            # print('sleep in case there is no metamask text removed')
-            # time.sleep(20)
+                if clickBtn(images['password'], timeout= 3):
+                    pyautogui.typewrite(c['login_password'], interval = 0.1)
+                    login_attempts = login_attempts + 1
+
+                    if clickBtn(images['login'], timeout = 3):
+                        logger('Logging in')
+
+                        if clickBtn(images['treasure-hunt-icon'], timeout = 15):
+                            logger('🎉🎉🎉🎉 THE FARM IS BEGINNING!')
+                            login_attempts = 0
+                            refreshHeroes()
+
+                    if clickBtn(images['ok'], timeout = 3):
+                        pass
+        
+        else:
+            if clickBtn(images['connect_metamask'], timeout = 5):
+                if clickBtn(images['select-wallet-2-pt'], timeout=20):
+                    # sometimes the sign popup appears imediately
+                    login_attempts = login_attempts + 1
+                    # print('sign button clicked')
+                    # print('{} login attempt'.format(login_attempts))
+                    if clickBtn(images['treasure-hunt-icon'], timeout = 15):
+                        # print('sucessfully login, treasure hunt btn clicked')
+                        logger('🎉🎉🎉🎉 THE FARM IS BEGINNING!')
+                        login_attempts = 0
+                        refreshHeroes()
+                    return
+                    # click ok button
+
+        if not clickBtn(images['select-wallet-1-no-hover'], ):
+            if clickBtn(images['select-wallet-1-hover'], threshold = ct['select_wallet_buttons'] ):
+                pass
+                # o ideal era que ele alternasse entre checar cada um dos 2 por um tempo 
+                # print('sleep in case there is no metamask text removed')
+                # time.sleep(20)
     else:
         pass
         # print('sleep in case there is no metamask text removed')
         # time.sleep(20)
 
-    if clickBtn(images['select-wallet-2'], timeout = 20):
-        login_attempts = login_attempts + 1
-        # print('sign button clicked')
-        # print('{} login attempt'.format(login_attempts))
-        # time.sleep(25)
-        if clickBtn(images['treasure-hunt-icon'], timeout=25):
-            # print('sucessfully login, treasure hunt btn clicked')
-            login_attempts = 0
-        # time.sleep(15)
 
     if clickBtn(images['ok'], timeout=5):
         pass
@@ -521,8 +525,6 @@ def main():
 
 
 if __name__ == '__main__':
-
-
 
     main()
 
