@@ -148,8 +148,8 @@
   save_log_to_file: True
 
   # Option to login by username or Metamask
-  login_metamask: False
+  login_metamask: True
 
   # If login_metamask is False, provide your username and password information:
-  login_username: "menkar1"
-  login_password: "&Menkar1"
+  login_username: ""
+  login_password: ""
