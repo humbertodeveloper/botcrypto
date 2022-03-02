@@ -188,10 +188,3 @@ exemplo na pasta “targets” para uma tirada no seu próprio computador:
 
 ### Algumas configuraçoes podem ser mudadas no arquivo config.yaml, nao se esqueça de reiniciar o bot caso mude as configuraçoes.
 
-## Curtiu? Dê aquela fortalecida :)
-
-### Wallet:
-#### 0xbd06182D8360FB7AC1B05e871e56c76372510dDf
-### Paypal:
-[Donate](https://www.paypal.com/donate?hosted_button_id=JVYSC6ZYCNQQQ)
-
